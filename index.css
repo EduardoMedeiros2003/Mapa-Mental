@@ -50,3 +50,16 @@ canvas {
 .modal-content {
     max-width: 90%;
 }
+
+@media (max-width: 768px) {
+    .controls-container {
+        max-height: none;
+        height: auto;
+        padding-bottom: 2rem;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 60vh !important;
+    }
+}
