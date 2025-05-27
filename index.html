@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-gray-900 text-gray-200 flex flex-col lg:flex-row h-screen overflow-hidden noselect">
+
+    <div class="controls-container w-full lg:w-1/3 xl:w-1/4 bg-gray-800 p-6 shadow-lg space-y-6">
+        <h1 class="text-2xl font-bold text-center text-blue-400">Mapa Mental</h1>
+
+        <div class="space-y-2">
+            <h2 class="text-lg font-semibold text-gray-300">Adicionar Conceito</h2>
+            <div>
+                <label for="conceptNodeText" class="block text-sm font-medium text-gray-400">Título do Conceito:</label>
+                <input type="text" id="conceptNodeText" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Ideia principal">
+            </div>
+            <button id="addConceptNodeBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">
+                Adicionar Conceito
+            </button>
+        </div>
+
+        <div class="space-y-2">
+            <h2 class="text-lg font-semibold text-gray-300">Conectar Elementos</h2>
+            <button id="connectModeBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">
+                Ativar Modo Conexão
+            </button>
+            <p id="connectStatus" class="text-sm text-gray-500 text-center">Modo Conexão: Desativado</p>
+        </div>
+
+        <div id="selectedElementSection" class="space-y-4 hidden p-4 bg-gray-750 rounded-lg border border-gray-600">
+            <h2 id="selectedElementTitle" class="text-lg font-semibold text-gray-300">Elemento Selecionado</h2>
+            
+            <div id="editConceptSection" class="space-y-2">
+                <div>
+                    <label for="editConceptNodeText" class="block text-sm font-medium text-gray-400">Editar Título do Conceito:</label>
+                    <input type="text" id="editConceptNodeText" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                </div>
+                <button id="updateConceptNodeBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">
+                    Atualizar Conceito
+                </button>
+                
+                <hr class="border-gray-600 my-3">
+                <h3 class="text-md font-semibold text-gray-300">Adicionar Texto Ligado</h3>
+                <div>
+                    <label for="detailNodeText" class="block text-sm font-medium text-gray-400">Texto do Detalhe:</label>
+                    <textarea id="detailNodeText" rows="3" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Explicação detalhada..."></textarea>
+                </div>
+                <button id="addDetailNodeBtn" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">
+                    Adicionar Texto Ligado
+                </button>
+            </div>
+
+            <div id="editDetailSection" class="space-y-2">
+                <div>
+                    <label for="editDetailNodeText" class="block text-sm font-medium text-gray-400">Editar Texto do Detalhe:</label>
+                    <textarea id="editDetailNodeText" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"></textarea>
+                </div>
+                <button id="updateDetailNodeBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out">
+                    Atualizar Texto Ligado
+                </button>
+            </div>
+            
+            <button id="deleteElementBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-150 ease-in-out mt-2">
+                Excluir Elemento
+            </button>
+        </div>
+        <div class="space-y-2 mt-4 p-3 bg-gray-700 rounded-lg border border-gray-600">
+            <h3 class="text-md font-semibold text-gray-300">Como Usar:</h3>
+            <ul class="list-disc list-inside text-sm text-gray-400 space-y-1">
+                <li><strong>Adicionar Conceito (Círculo):</strong> Digite o título, clique "Adicionar Conceito".</li>
+                <li><strong>Adicionar Texto Ligado (Retângulo):</strong> Selecione um Conceito. Digite o texto, clique "Adicionar Texto Ligado". Pode adicionar vários.</li>
+                <li><strong>Conectar Elementos:</strong> Ative "Modo Conexão".
+                    <ul class="list-['▹'] list-inside ml-4">
+                        <li>Conceito ↔ Conceito: Linha normal.</li>
+                        <li>Texto Ligado A → Texto Ligado B: B perde ligação com seu Conceito pai.</li>
+                    </ul>
+                </li>
+                <li><strong>Editar:</strong> Clique em um elemento. Edite no painel.</li>
+                <li><strong>Arrastar:</strong> Clique e segure para mover.</li>
+                <li><strong>Zoom:</strong> Roda do mouse no canvas.</li>
+                <li><strong>Pan:</strong> Segure Espaço e arraste no canvas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="flex-grow p-2 lg:p-6 flex items-center justify-center bg-gray-850">
+        <canvas id="mindMapCanvas" class="shadow-lg"></canvas>
+    </div>
+
+    <div id="alertModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal hidden">
+        <div class="modal-content bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h3 id="alertModalTitle" class="text-lg font-semibold text-red-400 mb-2">Atenção</h3>
+            <p id="alertModalMessage" class="text-gray-300 mb-4">Mensagem de alerta aqui.</p>
+            <button id="alertModalCloseBtn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
